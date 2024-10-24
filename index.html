@@ -1,0 +1,686 @@
+﻿<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$DOGAI - The Matrix of AI Cryptocurrencies</title>
+    <meta property="og:title" content="$DOGEAI - The Matrix of AI Cryptocurrencies">
+    <meta property="og:description" content="Join the AI-powered revolution in cryptocurrency with $DOGEAI!">
+    <meta property="og:image" content="images/Rgbjdrm.png">
+    <meta property="og:url" content="https://your-dogai-website-url.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="images/EsQTtQd.png">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', monospace;
+            background-color: #000;
+            color: #0f0;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        #matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            padding: 10px 10px 20px;
+            box-sizing: border-box;
+        }
+
+        .terminal {
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terminal::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, #0f0, #00ff00, #0f0);
+            animation: glitch 2s linear infinite;
+        }
+
+        @keyframes glitch {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .terminal-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #0f0;
+            padding-bottom: 10px;
+        }
+
+        .terminal-icon {
+            font-size: 10px;
+            line-height: 1;
+            margin-bottom: 10px;
+            white-space: pre;
+        }
+
+        h1 {
+            font-size: 20px;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .wallet-address {
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        .wallet-address:hover {
+            color: #00ff00;
+        }
+
+        .terminal-output {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #0f0;
+            background-color: rgba(0, 15, 0, 0.2);
+            font-size: 14px;
+        }
+
+        .terminal-input {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .terminal-input span {
+            margin-right: 10px;
+        }
+
+        .terminal-input input {
+            flex-grow: 1;
+            background-color: transparent;
+            border: none;
+            color: #0f0;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .terminal-footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8em;
+        }
+
+        @keyframes dogAppear {
+            from { transform: scale(0) rotate(0deg); }
+            to { transform: scale(1) rotate(360deg); }
+        }
+
+        .GGG3 {
+            position: absolute;
+            font-size: 2rem;
+            cursor: pointer;
+            user-select: none;
+            animation: dogAppear 0.5s ease-out;
+        }
+
+        .copied-message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 255, 0, 0.8);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .copied-message.show {
+            opacity: 1;
+        }
+
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .loading-text {
+            font-size: 24px;
+            color: #0f0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: loadingPulse 1s infinite;
+        }
+
+        @keyframes loadingPulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        #pill-choice {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        #pill-choice h2 {
+            color: #0f0;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .pills {
+            display: flex;
+            gap: 20px;
+        }
+
+        .pill {
+            width: 100px;
+            height: 50px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .pill:hover {
+            transform: scale(1.1);
+        }
+
+        .red-pill {
+            background-color: #ff0000;
+        }
+
+        .blue-pill {
+            background-color: #0000ff;
+        }
+
+        #red-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ff0000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 480px) {
+            .terminal {
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            .terminal-icon {
+                font-size: 8px;
+            }
+
+            .wallet-address {
+                font-size: 14px;
+            }
+
+            .terminal-output, .terminal-input input {
+                font-size: 12px;
+            }
+
+            .loading-text {
+                font-size: 18px;
+            }
+
+            #pill-choice h2 {
+                font-size: 20px;
+            }
+
+            .pill {
+                width: 80px;
+                height: 40px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="pill-choice">
+        <h2>Choose your pill</h2>
+        <div class="pills">
+            <div class="pill red-pill" onclick="choosePill('red')">JEET</div>
+            <div class="pill blue-pill" onclick="choosePill('blue')">CHAD</div>
+        </div>
+    </div>
+    <div id="red-screen">YOU'RE NOT WELCOME HERE</div>
+    <div id="loading-screen">
+        <div class="loading-text">Loading $DOGEAI Matrix</div>
+    </div>
+    <canvas id="matrix-bg" width="1900" height="900"></canvas>
+    <div class="container">
+        <div class="terminal">
+            <div class="terminal-header">
+                <pre class="terminal-icon">  __      _
+o'')}____//
+ `_/      )
+ (_(_/-(_/
+</pre>
+                <h1>$DOGEAI Terminal</h1>
+                <span class="wallet-address" id="wallet-address" title="Click to copy">Ls12ribfp5GF9YSwbdFSgFKPs2n9rSeCNz1fjtspump</span>
+            </div>
+            <div id="output" class="terminal-output"></div>
+            <form id="input-form" class="terminal-input">
+                <span>&gt;</span>
+                <input type="text" id="input" placeholder="Enter command (type 'help' for options)" autofocus="">
+            </form>
+            <div class="terminal-footer">
+                <div id="coin-counter">$DOGEAIs: 0</div>
+            </div>
+        </div>
+    </div>
+    <div class="copied-message" id="copied-message">Address copied to clipboard!</div>
+
+    <script>
+        const output = document.getElementById('output');
+        const input = document.getElementById('input');
+        const form = document.getElementById('input-form');
+        const walletAddress = document.getElementById('wallet-address');
+        const copiedMessage = document.getElementById('copied-message');
+        const loadingScreen = document.getElementById('loading-screen');
+        const coinCounter = document.getElementById('coin-counter');
+        const pillChoice = document.getElementById('pill-choice');
+        const redScreen = document.getElementById('red-screen');
+
+        let coins = 0;
+
+        const asciiDog = `
+            /\\___/\\
+           (  o o  )
+           /   V   \\
+          /(  \\_/  )\\
+            ^^ ^^
+        `;
+
+        const dogPhrases = [
+            "Woof! Got any treats... I mean $DOGEAIs?",
+            "I'm not just a good boy, I'm an AI-powered good boy!",
+            "Who let the $DOGEAIs out? Woof, woof, woof!",
+            "I don't always invest, but when I do, I prefer $DOGEAI.",
+            "To the moon? Nah, to the nearest AI-powered fire hydrant!",
+            "$DOGEAI: Because regular AI can't buy happiness, but dogs can!",
+            "I'm not lazy, I'm just training my neural networks in my sleep.",
+            "$DOGEAI: The only currency that appreciates faster than your dog's love.",
+            "Why chase cars when you can chase AI-powered profits with $DOGEAI?",
+            "$DOGEAI: Making fetch happen in the AI crypto world.",
+        ];
+
+        const dogTweets = [
+            "Just chased my tail for an hour. My AI says it's time well spent! #$DOGEAILife",
+            "Why fetch when you can train neural networks? #$DOGEAIToTheMoon",
+            "I don't always bark at the mailman, but when I do, I use AI-powered woofs.",
+            "Squirrel! I mean... $DOGEAI! #AIDistracted",
+            "Just buried some $DOGEAIs in the backyard. Quantum-encrypted cold storage, am I right?",
+            "Trying to teach my human about $DOGEAI. It's ruff work! #PatientAIPup",
+            "Who needs a golden retriever when you've got golden $DOGEAIs? #AIBreed",
+            "My human tried to pay for my treats with regular money. I'm not falling for that non-AI trick!",
+            "Just heard about AI-powered compound interest. Is that like when you compound a tennis ball with AI treats?",
+            "Overheard my human talking about 'going to work.' Why work when you can let AI invest in $DOGEAI?",
+            "Just learned about crypto trading. It's like fetch, but with more zeros!",
+            "Why chase the cat when I can chase profits?",
+            "I tried to explain $DOGEAI to my human, but they still don't get it.",
+            "Just opened my first crypto wallet. Now where do I bury it?",
+            "Forget gold, my portfolio is 100% treats and $DOGEAI!",
+            "Tried to buy a new toy with $DOGEAI. The store wasn't amused.",
+            "If only bones could appreciate in value like $DOGEAI!",
+            "I dream of the day I can pay for treats in $DOGEAI.",
+            "I dig up profits faster than bones!",
+            "Forget the dog park, I'm heading to the crypto exchange!",
+            "Who needs a bank when you have $DOGEAI?",
+            "The only thing better than a belly rub is watching my $DOGEAI grow.",
+            "Why fetch when I can trade?",
+            "Just started my own coin: WoofCoin.",
+            "I tried to teach the cat about crypto. Now he's ignoring me even more.",
+            "I may not understand blockchain, but I know $DOGEAI is the future.",
+            "What's better than chasing your tail? Chasing $DOGEAI profits!",
+            "I don't need a leash; $DOGEAI keeps me tethered.",
+            "All I need is a bowl of water and a $DOGEAI wallet.",
+            "I'm investing in $DOGEAI, because bones are so last century.",
+            "Every time my human talks about 'hodling,' I just wag my tail.",
+            "My human pays bills. I invest in $DOGEAI. #SmartDog",
+            "The squirrel in the yard doesn't know it yet, but I'm going to pay  him in $DOGEAI.",
+            "Who needs a job when you have crypto?",
+            "Just opened a $DOGEAI savings account. Can I have some treats now?",
+            "I've got diamond paws, and I'm holding for the moon!",
+            "I may chase cars, but $DOGEAI is my real passion.",
+            "Why dig for bones when I can dig for crypto?",
+            "Every time I hear about volatility, I just wag my tail harder.",
+            "Tried to explain to the neighborhood dogs how crypto works. They prefer bones.",
+            "Just learned about staking. Does that involve actual steaks?",
+            "I may not chase the mailman, but I'm chasing those gains!",
+            "My human tries to explain taxes. I'm more focused on $DOGEAI.",
+            "I'm barking up the right tree—$DOGEAI!",
+            "Who needs cash when you've got crypto?",
+            "I'm investing in $DOGEAI. Treats are just a bonus.",
+            "Why work when you can HODL?",
+            "The future is digital, and so are my profits.",
+            "I tried to pay the vet in $DOGEAI. They didn't accept it... yet.",
+            "What's volatility to a dog? Just another reason to bark!",
+            "$DOGEAI to the moon, or at least to the park!",
+            "I've buried my $DOGEAIs in the backyard for safekeeping.",
+            "My portfolio is all about diversification: bones, treats, and $DOGEAI.",
+            "I heard about compound interest. Does that mean more treats?",
+            "Why fetch sticks when I can fetch profits?",
+            "Just found out I can't buy a new bed with $DOGEAI... yet.",
+            "I tried to set up a mining rig in my doghouse, but I got distracted by squirrels.",
+            "Why worry about inflation when my $DOGEAI is inflating with profits?",
+            "I bark for more than just attention now—I bark for $DOGEAI.",
+            "I chase both the bull and bear markets. I'm not picky.",
+            "I've got four paws, and all of them are invested in crypto.",
+            "I may not dig for treasure, but I dig for $DOGEAI.",
+            "I'm HODLing on for dear life... and for treats.",
+            "Forget fetch, I'm all about that $DOGEAI life.",
+            "I just discovered smart contracts. Are those like doggy agreements?",
+            "Why chew bones when I can chew over $DOGEAI strategies?",
+            "Who knew my paws could hold so many coins?",
+            "The cat next door has no idea I'm richer than him.",
+            "Every bark is an investment in my future $DOGEAI gains.",
+            "I may not bark at the mailman anymore, but I still bark for $DOGEAI.",
+            "Just learned about liquidity pools. Does that involve swimming?",
+            "I chase trends like I chase my tail.",
+            "Who needs a savings account when you've got $DOGEAI?",
+            "I told the cat about DeFi. He walked away.   Typical.",
+            "I may not fetch, but I do hold. #HODL",
+            "What's better than a new toy? A new $DOGEAI!",
+            "I've got  paws of steel and $DOGEAIs in my wallet.",
+            "Why worry about bear markets? I'm more worried about bears in the park.",
+            "I'm digging my way to crypto success, one hole at a time.",
+            "I tried to explain the blockchain to the cat, but he's not interested.",
+            "Every time I hear the word 'volatile,' I wag my tail even more.",
+            "I'm staking my claim in the $DOGEAI world, one paw at a time.",
+            "Who needs a doghouse when you've got a crypto wallet?",
+            "My portfolio is diversified: bones, toys, and $DOGEAI.",
+            "Why chase cars when I can chase crypto?",
+            "Just learned about margin trading. Is that like chasing two balls at once?",
+            "My human keeps talking about the stock market. I'm more interested in $DOGEAI.",
+            "I chase more than just my tail. I chase $DOGEAI!",
+            "Forget the mailman, I'm barking at the crypto markets now.",
+            "Who needs a retirement fund when you've got $DOGEAI?",
+            "I may not understand taxes, but I know how to HODL.",
+            "Why dig holes when I can dig through blockchain data?",
+            "I just started my own crypto club—entry fee: one bone.",
+            "Every time the market dips, I chase my tail to distract myself.",
+            "I tried to explain staking to the neighbor's dog, but he just wanted a treat.",
+            "Why worry about interest rates when you've got crypto?",
+            "My human buys groceries, I buy $DOGEAI.",
+            "I'm on a mission to make $DOGEAI the next big thing in the park.",
+            "I told the cat about NFTs. He's still ignoring me.",
+            "Who needs a leash when you've got a blockchain tether?",
+            "I've got paws, and I'm not afraid to use them... for trading.",
+            "Every time the market barks, I listen.",
+            "I may not understand charts, but I know $DOGEAI is going to the moon.",
+            "Who needs toys when you've got crypto?",
+            "I just discovered yield farming. Does that involve actual farms?",
+            "Forget treats, I'm all about $DOGEAI rewards now.",
+            "Why chase squirrels when you can chase $DOGEAI profits?",
+            "I'm setting up a crypto exchange in my doghouse. First trade: one bone.",
+            "I tried to buy a new bed with $DOGEAI. No luck... yet.",
+            "Every bark is a call to invest in $DOGEAI.",
+            "I may not understand market trends, but I know how to HODL.",
+            "Who needs a rainy day fund when you've got $DOGEAI?",
+            "I've got diamond paws and a heart of gold... and a $DOGEAI wallet.",
+            "I just dug up my first $DOGEAI. Time to buy some treats!",
+            "Every time the market dips, I wag my tail harder.",
+            "I tried to explain $DOGEAI to the cat. He still doesn't get it.",
+            "I may not chase cars anymore, but I'm chasing $DOGEAI.",
+            "Why fetch when you can invest?",
+            "My human buys groceries, I buy $DOGEAI.",
+            "Every bark is an opportunity to HODL.",
+            "Why chase the mailman when you can chase crypto gains?",
+            "I just learned about smart contracts. Are those like treat agreements?",
+            "I tried to explain staking to the other dogs in the park. They didn't care.",
+            "Forget bones, I'm burying $DOGEAI in the backyard.",
+            "Why chase your tail when you can chase profits?",
+            "I told the cat about yield farming. He's not impressed.",
+            "Who needs cash when you've got $DOGEAI?",
+            "I just opened my first crypto wallet. Time to buy some treats.",
+            "Forget toys, I'm all about crypto now.",
+            "I may not understand market trends, but I know how to HODL.",
+            "I'm barking up the right tree—$DOGEAI!",
+            "Why fetch when you can trade?",
+            "I've got four paws, and they're all invested in crypto.",
+            "I'm setting up a crypto exchange in my doghouse. First trade: one bone.",
+            "Every time the market dips, I chase my tail to distract myself.",
+            "I'm on a mission to make $DOGEAI the next big thing in the park.",
+            "Who needs a leash when you've got blockchain?",
+            "Forget fetch, I'm all about $DOGEAI.",
+            "I'm digging for more than just bones—I'm digging for profits.",
+            "I tried to explain NFTs to the neighbor's dog. He's not impressed.",
+            "Who needs a doghouse when you've got crypto?",
+            "I'm all about diversification: bones, treats, and $DOGEAI.",
+            "Every bark is a call to invest in $DOGEAI.",
+            "I may not fetch, but I do HODL.",
+            "Who needs a savings account when you've got $DOGEAI?",
+            "I'm staking my claim in the $DOGEAI world, one paw at a time.",
+            "I've got diamond paws and a heart of gold... and a $DOGEAI wallet.",
+        ];
+
+        function choosePill(color) {
+            if (color === 'blue') {
+                pillChoice.style.display = 'none';
+                loadingScreen.style.display = 'flex';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    typeWriter("Welcome to $DOGEAI - The Matrix of AI Cryptocurrencies!", () => {
+                        typeWriter(asciiDog, () => {
+                            typeWriter(dogPhrases[Math.floor(Math.random() * dogPhrases.length)]);
+                        });
+                    });
+                }, 3000);
+            } else {
+                pillChoice.style.display = 'none';
+                redScreen.style.display = 'flex';
+            }
+        }
+
+        function typeWriter(text, callback) {
+            let i = 0;
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    output.innerHTML += text.charAt(i);
+                    i++;
+                    output.scrollTop = output.scrollHeight;
+                } else {
+                    clearInterval(typing);
+                    output.innerHTML += '<br>';
+                    if (callback) callback();
+                }
+            }, 50);
+        }
+
+        function handleCommand(cmd) {
+            switch (cmd.toLowerCase()) {
+                case 'help':
+                    typeWriter('Available commands: help, about, bark, play, tweet, clear, ca, dexscreener, twitter, telegram');
+                    break;
+                case 'about':
+                    typeWriter("$DOGEAI: The AI-powered memecoin that's pawsitively revolutionary! Our mission is to make cryptocurrency fun, accessible, and full of AI-enhanced belly rubs.");
+                    break;
+                case 'bark':
+                    typeWriter("Woof woof! You've unlocked a secret message: \"Every dog has its day, but with $DOGEAI, every day is an AI-powered dog day!\"");
+                    break;
+                case 'play':
+                    typeWriter('Catch the $DOGEAIs! Click on the dogs that appear on the screen.');
+                    spawnDogs();
+                    break;
+                case 'tweet':
+                    const tweet = dogTweets[Math.floor(Math.random() * dogTweets.length)];
+                    typeWriter(tweet);
+                    break;
+                case 'clear':
+                    output.innerHTML = '';
+                    break;
+                case 'ca':
+                    const demoAddress = 'Ls12ribfp5GF9YSwbdFSgFKPs2n9rSeCNz1fjtspump';
+                    typeWriter(`$DOGEAI CA: ${demoAddress}`);
+                    break;
+                case 'twitter':
+                    window.open('https://twitter.com/dogai_sol', '_blank');
+                    typeWriter('Opening Twitter...');
+                    break;
+                case 'dexscreener':
+                    typeWriter('Soon...');
+                    break;
+                case 'telegram':
+                    window.open('https://t.me/dogai_sol', '_blank');
+                    typeWriter('Opening Telegram...');
+                    break;
+                default:
+                    typeWriter(`Command not recognized. Type 'help' for available commands.`);
+            }
+        }
+
+        function spawnDogs() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const dog = document.createElement('div');
+                    dog.innerHTML = '🐶';
+                    dog.className = 'GGG3';
+                    dog.style.left = `${Math.random() * 80 + 10}%`;
+                    dog.style.top = `${Math.random() * 80 + 10}%`;
+                    dog.onclick = () => {
+                        coins++;
+                        coinCounter.textContent = `$DOGEAIs: ${coins}`;
+                        dog.remove();
+                    };
+                    document.body.appendChild(dog);
+                    setTimeout(() => dog.remove(), 3000);
+                }, i * 1000);
+            }
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const cmd = input.value;
+            output.innerHTML += `> ${cmd}<br>`;
+            handleCommand(cmd);
+            input.value = '';
+        });
+
+        // Matrix background effect
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+
+        const columns = canvas.width / 20;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0';
+            ctx.font = '15px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = String.fromCharCode(Math.floor(Math.random() * 128));
+                ctx.fillText(text, i * 20, drops[i] * 20);
+
+                if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        }
+
+        // Initial setup
+        setInterval(draw, 33); // Start the Matrix background animation
+
+        // Resize event listener for responsive Matrix background
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+        });
+
+        // Wallet address copy functionality
+        walletAddress.addEventListener('click', () => {
+            const addressText = walletAddress.textContent;
+            navigator.clipboard.writeText(addressText).then(() => {
+                copiedMessage.classList.add('show');
+                setTimeout(() => {
+                    copiedMessage.classList.remove('show');
+                }, 2000);
+            });
+        });
+    </script>
+
+</body></html>
